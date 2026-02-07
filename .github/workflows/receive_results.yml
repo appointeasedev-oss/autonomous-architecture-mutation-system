@@ -1,0 +1,38 @@
+name: Receive Kaggle results
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  receive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate results payload
+        run: |
+          if [ ! -f experiments/results/results.json ]; then
+            echo "Expected experiments/results/results.json to exist."
+            exit 1
+          fi
+
+      - name: Store results
+        run: python -m aams.receive_results --input experiments/results/results.json
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/results/results.json logs/pending.json specs/pending/arch_spec.json
+          if git diff --cached --quiet; then
+            echo "No results to commit."
+            exit 0
+          fi
+          git commit -m "Store Kaggle results"
+          git push

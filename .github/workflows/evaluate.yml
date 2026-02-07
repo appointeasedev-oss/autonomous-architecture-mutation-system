@@ -1,0 +1,39 @@
+name: Evaluate Kaggle results
+
+on:
+  push:
+    paths:
+      - "experiments/results/results.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Evaluate mutation
+        run: python -m aams.evaluate_cycle
+
+      - name: Commit evaluation results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add specs/current/arch_spec.json specs/history docs/metrics.json logs/experiments.jsonl
+          if git diff --cached --quiet; then
+            echo "No evaluation updates to commit."
+            exit 0
+          fi
+          git commit -m "Evaluate Kaggle mutation"
+          git push

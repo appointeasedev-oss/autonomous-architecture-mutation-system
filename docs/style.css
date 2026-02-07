@@ -1,0 +1,127 @@
+:root {
+  color-scheme: light;
+  font-family: "Courier New", "Lucida Console", monospace;
+}
+
+body {
+  margin: 0;
+  background: #ffffff;
+  color: #111111;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 20px 48px;
+}
+
+header {
+  margin-bottom: 24px;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 2rem;
+}
+
+.subtitle {
+  margin: 0;
+  color: #333333;
+}
+
+.card {
+  background: #ffffff;
+  border: 2px solid #111111;
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 6px 6px 0 #111111;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.label {
+  display: block;
+  color: #111111;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+pre {
+  background: #f4f4f4;
+  border: 2px solid #111111;
+  border-radius: 4px;
+  padding: 16px;
+  overflow-x: auto;
+  margin: 0;
+}
+
+.chat {
+  display: grid;
+  gap: 16px;
+}
+
+.chat-log {
+  background: #f4f4f4;
+  border: 2px solid #111111;
+  border-radius: 4px;
+  padding: 16px;
+  min-height: 160px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.chat-line {
+  display: flex;
+  gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px dashed #111111;
+}
+
+.chat-line:last-child {
+  border-bottom: none;
+}
+
+.chat-role {
+  min-width: 80px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.chat-message {
+  white-space: pre-wrap;
+}
+
+.chat-inputs {
+  display: grid;
+  gap: 8px;
+}
+
+textarea {
+  font-family: inherit;
+  border: 2px solid #111111;
+  padding: 10px;
+  resize: vertical;
+}
+
+button {
+  font-family: inherit;
+  border: 2px solid #111111;
+  background: #ffffff;
+  color: #111111;
+  padding: 8px 16px;
+  cursor: pointer;
+  width: fit-content;
+  box-shadow: 4px 4px 0 #111111;
+}
+
+button:active {
+  box-shadow: 2px 2px 0 #111111;
+  transform: translate(2px, 2px);
+}

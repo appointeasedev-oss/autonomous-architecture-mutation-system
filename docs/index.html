@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AAMS Metrics Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Autonomous Architecture Mutation System</h1>
+        <p class="subtitle">Metrics dashboard for evolution cycles</p>
+      </header>
+
+      <section class="card" id="summary">
+        <h2>Latest cycle</h2>
+        <div class="grid">
+          <div>
+            <span class="label">Timestamp</span>
+            <span id="timestamp">Loading…</span>
+          </div>
+          <div>
+            <span class="label">Mutation</span>
+            <span id="mutation">Loading…</span>
+          </div>
+          <div>
+            <span class="label">Accepted</span>
+            <span id="accepted">Loading…</span>
+          </div>
+          <div>
+            <span class="label">Fitness</span>
+            <span id="fitness">Loading…</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Metrics</h2>
+        <div class="grid">
+          <div>
+            <span class="label">Loss</span>
+            <span id="loss">Loading…</span>
+          </div>
+          <div>
+            <span class="label">Latency</span>
+            <span id="latency">Loading…</span>
+          </div>
+          <div>
+            <span class="label">Parameters</span>
+            <span id="params">Loading…</span>
+          </div>
+          <div>
+            <span class="label">Seed</span>
+            <span id="seed">Loading…</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Current architecture</h2>
+        <pre id="spec">Loading…</pre>
+      </section>
+
+      <section class="card">
+        <h2>Operator console</h2>
+        <p class="subtitle">Chat with the live evolution assistant (local demo).</p>
+        <div class="chat">
+          <div class="chat-log" id="chat-log" aria-live="polite"></div>
+          <div class="chat-inputs">
+            <label class="label" for="chat-input">Command</label>
+            <textarea id="chat-input" rows="3" placeholder="Ask about the latest evolution cycle..."></textarea>
+            <button id="chat-send" type="button">Send</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

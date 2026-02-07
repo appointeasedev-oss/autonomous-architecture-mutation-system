@@ -1,0 +1,9 @@
+{
+  "attention": "gqa",
+  "d_model": 256,
+  "ffn": "swiglu",
+  "n_heads": 8,
+  "n_layers": 6,
+  "pos_encoding": "rotary",
+  "residual": "pre_norm"
+}

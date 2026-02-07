@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AAMS Hybrid Architecture Spec",
+  "type": "object",
+  "required": [
+    "d_model",
+    "n_layers",
+    "n_heads",
+    "attention",
+    "ffn",
+    "residual",
+    "pos_encoding"
+  ],
+  "properties": {
+    "d_model": {"type": "integer", "minimum": 128, "maximum": 768},
+    "n_layers": {"type": "integer", "minimum": 2, "maximum": 12},
+    "n_heads": {"type": "integer", "minimum": 2, "maximum": 16},
+    "attention": {"type": "string", "enum": ["mhsa", "gqa", "mqa", "linear"]},
+    "ffn": {"type": "string", "enum": ["gelu", "swiglu"]},
+    "residual": {"type": "string", "enum": ["pre_norm", "post_norm"]},
+    "pos_encoding": {"type": "string", "enum": ["rotary", "absolute"]}
+  }
+}
