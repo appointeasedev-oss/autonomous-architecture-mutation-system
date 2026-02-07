@@ -1,0 +1,10 @@
+# Python
+__pycache__/
+*.pyc
+
+# Logs and local outputs
+logs/*.jsonl
+docs/metrics.json
+
+# Virtual environments
+.venv/
