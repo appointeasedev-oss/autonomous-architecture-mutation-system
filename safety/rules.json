@@ -1,0 +1,8 @@
+{
+  "max_layer_delta": 1,
+  "max_width_delta": 64,
+  "min_layers": 2,
+  "max_layers": 12,
+  "min_d_model": 128,
+  "max_d_model": 768
+}
