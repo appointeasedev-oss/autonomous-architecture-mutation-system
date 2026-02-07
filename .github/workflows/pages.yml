@@ -2,7 +2,7 @@ name: Deploy metrics dashboard
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "work"]
     paths:
       - "docs/**"
   workflow_dispatch:
