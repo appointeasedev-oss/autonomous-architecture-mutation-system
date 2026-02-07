@@ -1,0 +1,35 @@
+name: Dispatch Kaggle training
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Upload experiment bundle artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: aams-experiment-bundle
+          path: experiments/bundle
+
+      - name: Upload bundle to Kaggle (optional)
+        env:
+          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+        run: |
+          if [ -z "$KAGGLE_USERNAME" ] || [ -z "$KAGGLE_KEY" ]; then
+            echo "Kaggle secrets not configured. Skipping upload."
+            exit 0
+          fi
+          python -m pip install --upgrade pip kaggle
+          mkdir -p ~/.kaggle
+          echo "{\"username\":\"$KAGGLE_USERNAME\",\"key\":\"$KAGGLE_KEY\"}" > ~/.kaggle/kaggle.json
+          chmod 600 ~/.kaggle/kaggle.json
+          echo "TODO: configure kaggle dataset/kernel upload for experiments/bundle."

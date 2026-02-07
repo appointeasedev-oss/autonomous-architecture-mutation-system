@@ -1,15 +1,16 @@
-name: AAMS evolution loop
+name: Evaluate Kaggle results
 
 on:
-  schedule:
-    - cron: "*/5 * * * *"
+  push:
+    paths:
+      - "experiments/results/results.json"
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  evolve:
+  evaluate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -22,17 +23,17 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Bundle experiment
-        run: python -m aams.bundle_experiment --seed ${{ github.run_id }}
+      - name: Evaluate mutation
+        run: python -m aams.evaluate_cycle
 
-      - name: Commit and push updates
+      - name: Commit evaluation results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add specs/pending/arch_spec.json logs/pending.json experiments/bundle
+          git add specs/current/arch_spec.json specs/history docs/metrics.json logs/experiments.jsonl
           if git diff --cached --quiet; then
-            echo "No changes to commit."
+            echo "No evaluation updates to commit."
             exit 0
           fi
-          git commit -m "Stage mutation bundle"
+          git commit -m "Evaluate Kaggle mutation"
           git push

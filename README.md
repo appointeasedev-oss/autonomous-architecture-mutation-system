@@ -45,13 +45,13 @@ docs/                  # GitHub Pages metrics dashboard
 
 > Note: Directories are scaffolded now. Implementation will be added iteratively.
 
-## GitHub Actions (planned)
-- `evolve.yml`: orchestrates mutation and code generation.
-- `dispatch_kaggle.yml`: sends experiment bundles to Kaggle.
-- `receive_results.yml`: parses Kaggle outputs into logs.
+## GitHub Actions (available)
+- `evolve.yml`: orchestrates mutation and code generation (creates a pending spec + bundle).
+- `dispatch_kaggle.yml`: uploads the experiment bundle and (optionally) sends it to Kaggle.
+- `receive_results.yml`: stores Kaggle outputs into the repo for evaluation.
 - `evaluate.yml`: accepts or rejects mutations and updates specs.
 
-## Kaggle integration (planned)
+## Kaggle integration (ready for wiring)
 Kaggle will be used only for training jobs. The notebook in `kaggle/` will:
 1. Pull the experiment bundle.
 2. Train the model.
@@ -70,8 +70,14 @@ Kaggle will be used only for training jobs. The notebook in `kaggle/` will:
 The `AAMS evolution loop` workflow runs every 5 minutes (GitHub's minimum schedule)
 and on manual dispatch. Each run:
 - Mutates the current spec.
-- Updates `docs/metrics.json` and `logs/experiments.jsonl`.
+- Writes a pending spec + experiment bundle.
 - Commits and pushes changes back to the repo.
+
+To complete the Kaggle loop:
+1. Run `dispatch_kaggle.yml` to upload the latest bundle.
+2. Execute the Kaggle notebook to train and generate `results.json`.
+3. Commit `experiments/results/results.json` (or upload it via workflow).
+4. Run `evaluate.yml` to accept/reject the mutation.
 
 ## GitHub Pages dashboard
 The metrics dashboard lives in `docs/` and reads `docs/metrics.json`.
@@ -88,7 +94,7 @@ To enable it:
 1. **Decide the first domain to evolve** (language/vision/hybrid).
 2. **Run local cycles** to populate logs and metrics.
 3. **Enable GitHub Pages** so the dashboard is live.
-4. **Add Kaggle credentials** and a Kaggle notebook once you're ready for GPU runs.
+4. **Add Kaggle credentials** and run `dispatch_kaggle.yml` once you're ready for GPU runs.
 
 ## Next steps
 - Add initial domain schemas and baseline specs.

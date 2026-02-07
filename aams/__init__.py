@@ -6,4 +6,7 @@ __all__ = [
     "mutate",
     "train",
     "evaluate",
+    "bundle_experiment",
+    "receive_results",
+    "evaluate_cycle",
 ]
