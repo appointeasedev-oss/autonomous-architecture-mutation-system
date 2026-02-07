@@ -1,0 +1,24 @@
+{
+  "updated_at": "2024-01-01T00:00:00Z",
+  "latest": {
+    "timestamp": "2024-01-01T00:00:00Z",
+    "mutation": "seed",
+    "accepted": true,
+    "fitness": 3.12,
+    "metrics": {
+      "loss": 3.02,
+      "latency": 7.2,
+      "params": 12288000,
+      "seed": 1234
+    },
+    "spec": {
+      "attention": "gqa",
+      "d_model": 256,
+      "ffn": "swiglu",
+      "n_heads": 8,
+      "n_layers": 6,
+      "pos_encoding": "rotary",
+      "residual": "pre_norm"
+    }
+  }
+}
